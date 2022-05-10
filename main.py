@@ -438,6 +438,11 @@ def validate(val_loader, model, criterion, args):
             if i % args.print_freq == 0:
                 progress.display(i)
 
+            if args.evaluate:       # when evaluating, show more detail about each picture
+                print("pic:{:2}  aim:{:2}  result:{:4} {:>8}".format(i, int(target), int(output.argmax()), 'correct' if int(target) == int(output.argmax()) else 'false'))
+                if i == 100:        # no need to caculate all 10,000 pics
+                      break
+
         progress.display_summary()
 
     #---------------Change: Add more return values-----------------#
