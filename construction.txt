@@ -71,3 +71,12 @@ AdaptiveAvgPool2d-67            [-1, 512, 1, 1]               0
            Linear-68                  [-1, 200]         102,600
            ResNet-69                  [-1, 200]               0
 ================================================================
+Total params: 11,279,112
+Trainable params: 11,279,112
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.05
+Forward/backward pass size (MB): 5.13
+Params size (MB): 43.03
+Estimated Total Size (MB): 48.21
+----------------------------------------------------------------
