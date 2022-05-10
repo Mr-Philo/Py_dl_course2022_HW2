@@ -1,0 +1,233 @@
+=> creating model 'resnet18'
+=> loading checkpoint '/code/checkpoint_epoch5.pth.tar'
+=> loaded checkpoint '/code/checkpoint_epoch5.pth.tar' (epoch 6)
+Test: [    0/10000]	Time  0.242 ( 0.242)	Loss 6.2747e-01 (6.2747e-01)	Acc@1 100.00 (100.00)	Acc@5 100.00 (100.00)
+pic: 0  aim: 0  result:   0  correct
+pic: 1  aim: 0  result:   0  correct
+pic: 2  aim: 0  result:   0  correct
+pic: 3  aim: 0  result: 148    false
+pic: 4  aim: 0  result:   0  correct
+pic: 5  aim: 0  result:   0  correct
+pic: 6  aim: 0  result:   0  correct
+pic: 7  aim: 0  result:   0  correct
+pic: 8  aim: 0  result:   0  correct
+pic: 9  aim: 0  result:   0  correct
+Test: [   10/10000]	Time  0.004 ( 0.027)	Loss 6.5436e-02 (2.3325e-01)	Acc@1 100.00 ( 90.91)	Acc@5 100.00 (100.00)
+pic:10  aim: 0  result:   0  correct
+pic:11  aim: 0  result:   0  correct
+pic:12  aim: 0  result:   0  correct
+pic:13  aim: 0  result:  45    false
+pic:14  aim: 0  result:   0  correct
+pic:15  aim: 0  result:   0  correct
+pic:16  aim: 0  result:   0  correct
+pic:17  aim: 0  result: 196    false
+pic:18  aim: 0  result: 129    false
+pic:19  aim: 0  result:   0  correct
+Test: [   20/10000]	Time  0.004 ( 0.017)	Loss 3.8322e+00 (1.1141e+00)	Acc@1   0.00 ( 76.19)	Acc@5   0.00 ( 85.71)
+pic:20  aim: 0  result: 199    false
+pic:21  aim: 0  result:   0  correct
+pic:22  aim: 0  result:   0  correct
+pic:23  aim: 0  result:   0  correct
+pic:24  aim: 0  result: 186    false
+pic:25  aim: 0  result:   0  correct
+pic:26  aim: 0  result:   0  correct
+pic:27  aim: 0  result:   0  correct
+pic:28  aim: 0  result:   0  correct
+pic:29  aim: 0  result:   0  correct
+Test: [   30/10000]	Time  0.004 ( 0.013)	Loss 2.7805e-01 (8.4258e-01)	Acc@1 100.00 ( 80.65)	Acc@5 100.00 ( 90.32)
+pic:30  aim: 0  result:   0  correct
+pic:31  aim: 0  result:  69    false
+pic:32  aim: 0  result:   0  correct
+pic:33  aim: 0  result:   0  correct
+pic:34  aim: 0  result:   0  correct
+pic:35  aim: 0  result:   0  correct
+pic:36  aim: 0  result:   0  correct
+pic:37  aim: 0  result:   0  correct
+pic:38  aim: 0  result:   0  correct
+pic:39  aim: 0  result:  45    false
+Test: [   40/10000]	Time  0.004 ( 0.011)	Loss 9.7606e-02 (7.2786e-01)	Acc@1 100.00 ( 80.49)	Acc@5 100.00 ( 92.68)
+pic:40  aim: 0  result:   0  correct
+pic:41  aim: 0  result:   0  correct
+pic:42  aim: 0  result:   0  correct
+pic:43  aim: 0  result:   0  correct
+pic:44  aim: 0  result:  36    false
+pic:45  aim: 0  result:  48    false
+pic:46  aim: 0  result:   0  correct
+pic:47  aim: 0  result:   0  correct
+pic:48  aim: 0  result:   0  correct
+pic:49  aim: 0  result:   0  correct
+Test: [   50/10000]	Time  0.006 ( 0.010)	Loss 2.8081e+00 (7.6171e-01)	Acc@1   0.00 ( 78.43)	Acc@5 100.00 ( 94.12)
+pic:50  aim: 1  result:  20    false
+pic:51  aim: 1  result:   9    false
+pic:52  aim: 1  result:  88    false
+pic:53  aim: 1  result:   1  correct
+pic:54  aim: 1  result:   1  correct
+pic:55  aim: 1  result: 118    false
+pic:56  aim: 1  result:   1  correct
+pic:57  aim: 1  result:   1  correct
+pic:58  aim: 1  result:   1  correct
+pic:59  aim: 1  result:   1  correct
+Test: [   60/10000]	Time  0.006 ( 0.010)	Loss 3.7193e-03 (8.5357e-01)	Acc@1 100.00 ( 77.05)	Acc@5 100.00 ( 93.44)
+pic:60  aim: 1  result:   1  correct
+pic:61  aim: 1  result:   1  correct
+pic:62  aim: 1  result:   1  correct
+pic:63  aim: 1  result:   1  correct
+pic:64  aim: 1  result:  84    false
+pic:65  aim: 1  result:  10    false
+pic:66  aim: 1  result:   1  correct
+pic:67  aim: 1  result:   1  correct
+pic:68  aim: 1  result:   1  correct
+pic:69  aim: 1  result:  95    false
+Test: [   70/10000]	Time  0.005 ( 0.009)	Loss 3.6295e+00 (9.2744e-01)	Acc@1   0.00 ( 74.65)	Acc@5   0.00 ( 90.14)
+pic:70  aim: 1  result:   9    false
+pic:71  aim: 1  result:   1  correct
+pic:72  aim: 1  result:   1  correct
+pic:73  aim: 1  result:   1  correct
+pic:74  aim: 1  result:   1  correct
+pic:75  aim: 1  result:   1  correct
+pic:76  aim: 1  result:   1  correct
+pic:77  aim: 1  result:   1  correct
+pic:78  aim: 1  result:   1  correct
+pic:79  aim: 1  result: 108    false
+Test: [   80/10000]	Time  0.006 ( 0.009)	Loss 9.8959e-01 (8.5766e-01)	Acc@1 100.00 ( 76.54)	Acc@5 100.00 ( 91.36)
+pic:80  aim: 1  result:   1  correct
+pic:81  aim: 1  result:   1  correct
+pic:82  aim: 1  result:   1  correct
+pic:83  aim: 1  result:   1  correct
+pic:84  aim: 1  result:   1  correct
+pic:85  aim: 1  result:   1  correct
+pic:86  aim: 1  result:   1  correct
+pic:87  aim: 1  result:   1  correct
+pic:88  aim: 1  result: 171    false
+pic:89  aim: 1  result:   1  correct
+Test: [   90/10000]	Time  0.010 ( 0.009)	Loss 1.4469e-01 (8.3002e-01)	Acc@1 100.00 ( 78.02)	Acc@5 100.00 ( 91.21)
+pic:90  aim: 1  result:   1  correct
+pic:91  aim: 1  result:   1  correct
+pic:92  aim: 1  result: 118    false
+pic:93  aim: 1  result:  44    false
+pic:94  aim: 1  result:  88    false
+pic:95  aim: 1  result:   1  correct
+pic:96  aim: 1  result:   9    false
+pic:97  aim: 1  result: 194    false
+pic:98  aim: 1  result:   1  correct
+pic:99  aim: 1  result:   1  correct
+Test: [  100/10000]	Time  0.005 ( 0.008)	Loss 6.1581e-01 (9.1970e-01)	Acc@1 100.00 ( 75.25)	Acc@5 100.00 ( 90.10)
+pic:100  aim: 2  result:   2  correct
+ *   Acc@1 75.248 Acc@5 90.099
+%run main.py /data/bitahub/Tiny-ImageNet -e --resume /code/checkpoint_epoch10.pth.tar -b 1
+=> creating model 'resnet18'
+=> loading checkpoint '/code/checkpoint_epoch10.pth.tar'
+=> loaded checkpoint '/code/checkpoint_epoch10.pth.tar' (epoch 11)
+Test: [    0/10000]	Time  0.233 ( 0.233)	Loss 2.1480e+00 (2.1480e+00)	Acc@1   0.00 (  0.00)	Acc@5 100.00 (100.00)
+pic: 0  aim: 0  result: 189    false
+pic: 1  aim: 0  result:   0  correct
+pic: 2  aim: 0  result:   0  correct
+pic: 3  aim: 0  result:   0  correct
+pic: 4  aim: 0  result:   0  correct
+pic: 5  aim: 0  result:  38    false
+pic: 6  aim: 0  result:   0  correct
+pic: 7  aim: 0  result:   0  correct
+pic: 8  aim: 0  result:  46    false
+pic: 9  aim: 0  result:  72    false
+Test: [   10/10000]	Time  0.006 ( 0.026)	Loss 8.4961e-02 (1.1444e+00)	Acc@1 100.00 ( 63.64)	Acc@5 100.00 (100.00)
+pic:10  aim: 0  result:   0  correct
+pic:11  aim: 0  result:  13    false
+pic:12  aim: 0  result:   0  correct
+pic:13  aim: 0  result:  45    false
+pic:14  aim: 0  result: 184    false
+pic:15  aim: 0  result:   0  correct
+pic:16  aim: 0  result: 185    false
+pic:17  aim: 0  result: 196    false
+pic:18  aim: 0  result:  45    false
+pic:19  aim: 0  result: 159    false
+Test: [   20/10000]	Time  0.006 ( 0.016)	Loss 5.2674e+00 (2.9856e+00)	Acc@1   0.00 ( 42.86)	Acc@5   0.00 ( 66.67)
+pic:20  aim: 0  result:  58    false
+pic:21  aim: 0  result:   0  correct
+pic:22  aim: 0  result: 189    false
+pic:23  aim: 0  result:   0  correct
+pic:24  aim: 0  result: 186    false
+pic:25  aim: 0  result:   0  correct
+pic:26  aim: 0  result:   0  correct
+pic:27  aim: 0  result: 189    false
+pic:28  aim: 0  result:   0  correct
+pic:29  aim: 0  result:   0  correct
+Test: [   30/10000]	Time  0.007 ( 0.013)	Loss 2.0067e+00 (2.5585e+00)	Acc@1   0.00 ( 48.39)	Acc@5 100.00 ( 74.19)
+pic:30  aim: 0  result:  18    false
+pic:31  aim: 0  result:  69    false
+pic:32  aim: 0  result: 184    false
+pic:33  aim: 0  result: 180    false
+pic:34  aim: 0  result:   0  correct
+pic:35  aim: 0  result:   0  correct
+pic:36  aim: 0  result:   0  correct
+pic:37  aim: 0  result:   0  correct
+pic:38  aim: 0  result:   0  correct
+pic:39  aim: 0  result:  36    false
+Test: [   40/10000]	Time  0.005 ( 0.011)	Loss 4.4224e-01 (2.3455e+00)	Acc@1 100.00 ( 51.22)	Acc@5 100.00 ( 75.61)
+pic:40  aim: 0  result:   0  correct
+pic:41  aim: 0  result:   0  correct
+pic:42  aim: 0  result: 193    false
+pic:43  aim: 0  result: 184    false
+pic:44  aim: 0  result:  36    false
+pic:45  aim: 0  result:  58    false
+pic:46  aim: 0  result:   0  correct
+pic:47  aim: 0  result:   0  correct
+pic:48  aim: 0  result:   0  correct
+pic:49  aim: 0  result:  58    false
+Test: [   50/10000]	Time  0.006 ( 0.010)	Loss 3.0462e+00 (2.2802e+00)	Acc@1   0.00 ( 49.02)	Acc@5   0.00 ( 76.47)
+pic:50  aim: 1  result: 174    false
+pic:51  aim: 1  result:   9    false
+pic:52  aim: 1  result: 145    false
+pic:53  aim: 1  result:  17    false
+pic:54  aim: 1  result:   1  correct
+pic:55  aim: 1  result:  27    false
+pic:56  aim: 1  result:  55    false
+pic:57  aim: 1  result: 185    false
+pic:58  aim: 1  result:   1  correct
+pic:59  aim: 1  result:   9    false
+Test: [   60/10000]	Time  0.006 ( 0.009)	Loss 1.4176e-02 (2.4607e+00)	Acc@1 100.00 ( 45.90)	Acc@5 100.00 ( 73.77)
+pic:60  aim: 1  result:   1  correct
+pic:61  aim: 1  result:  38    false
+pic:62  aim: 1  result:   1  correct
+pic:63  aim: 1  result: 152    false
+pic:64  aim: 1  result: 167    false
+pic:65  aim: 1  result:  19    false
+pic:66  aim: 1  result:   1  correct
+pic:67  aim: 1  result:   1  correct
+pic:68  aim: 1  result:   9    false
+pic:69  aim: 1  result:  99    false
+Test: [   70/10000]	Time  0.006 ( 0.008)	Loss 5.1741e+00 (2.7191e+00)	Acc@1   0.00 ( 43.66)	Acc@5 100.00 ( 73.24)
+pic:70  aim: 1  result:   9    false
+pic:71  aim: 1  result:   7    false
+pic:72  aim: 1  result:   1  correct
+pic:73  aim: 1  result:  88    false
+pic:74  aim: 1  result: 139    false
+pic:75  aim: 1  result:  17    false
+pic:76  aim: 1  result:   1  correct
+pic:77  aim: 1  result:  17    false
+pic:78  aim: 1  result:  51    false
+pic:79  aim: 1  result: 108    false
+Test: [   80/10000]	Time  0.006 ( 0.008)	Loss 5.8061e+00 (2.7860e+00)	Acc@1   0.00 ( 40.74)	Acc@5   0.00 ( 71.60)
+pic:80  aim: 1  result:  17    false
+pic:81  aim: 1  result:   1  correct
+pic:82  aim: 1  result:   5    false
+pic:83  aim: 1  result:   1  correct
+pic:84  aim: 1  result:   1  correct
+pic:85  aim: 1  result:   1  correct
+pic:86  aim: 1  result:  37    false
+pic:87  aim: 1  result:   1  correct
+pic:88  aim: 1  result:   1  correct
+pic:89  aim: 1  result:   1  correct
+Test: [   90/10000]	Time  0.006 ( 0.008)	Loss 4.4741e+00 (2.6342e+00)	Acc@1   0.00 ( 43.96)	Acc@5   0.00 ( 72.53)
+pic:90  aim: 1  result: 139    false
+pic:91  aim: 1  result:   1  correct
+pic:92  aim: 1  result:  68    false
+pic:93  aim: 1  result:  43    false
+pic:94  aim: 1  result:  19    false
+pic:95  aim: 1  result:   1  correct
+pic:96  aim: 1  result:   9    false
+pic:97  aim: 1  result:   7    false
+pic:98  aim: 1  result:   1  correct
+pic:99  aim: 1  result: 122    false
+Test: [  100/10000]	Time  0.006 ( 0.007)	Loss 3.4318e+00 (2.7799e+00)	Acc@1   0.00 ( 42.57)	Acc@5 100.00 ( 71.29)
+pic:100  aim: 2  result:   3    false
+ *   Acc@1 42.574 Acc@5 71.287
