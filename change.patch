@@ -1,0 +1,193 @@
+diff --git a/main.py b/main.py
+index 8d41291..7bc971f 100644
+--- a/main.py
++++ b/main.py
+@@ -1,6 +1,7 @@
+ import argparse
+ import os
+ import random
++import re
+ import shutil
+ import time
+ import warnings
+@@ -20,6 +21,11 @@ import torchvision.transforms as transforms
+ import torchvision.datasets as datasets
+ import torchvision.models as models
+ 
++# add tensorboard for visibility
++from datetime import datetime
++from torch.utils.tensorboard import SummaryWriter
++from torchsummary import summary
++
+ model_names = sorted(name for name in models.__dict__
+     if name.islower() and not name.startswith("__")
+     and callable(models.__dict__[name]))
+@@ -137,6 +143,10 @@ def main_worker(gpu, ngpus_per_node, args):
+     else:
+         print("=> creating model '{}'".format(args.arch))
+         model = models.__dict__[args.arch]()
++    # ----------change: use function 'torch.nn.Linear()' to change the output dimension of the fully connected layer------------------------#
++    out_features = 200                      # output features for tiny-imagenet
++    in_features = model.fc.in_features      # the original features of resnet
++    model.fc = torch.nn.Linear(in_features, out_features)
+ 
+     if not torch.cuda.is_available():
+         print('using CPU, this will be slow')
+@@ -205,16 +215,54 @@ def main_worker(gpu, ngpus_per_node, args):
+     cudnn.benchmark = True
+ 
+     # Data loading code
++    # -------------- Change: We need to change the construction in valdir when using tiny-imagenet -------------#
+     traindir = os.path.join(args.data, 'train')
+-    valdir = os.path.join(args.data, 'val')
++    # valdir = os.path.join(args.data, 'val')
++    f = open("/data/bitahub/Tiny-ImageNet/val/val_annotations.txt","r")       # the relative path of the file is corresponding to local path
++    val_labels = f.readlines()      # get labels in val_annotations.txt to correct the original labels
++    f.close()
++
++    d = {}        # create a new dictionary to store the map between images and labels
++    for item in val_labels:
++        # split according to the format of val_annotations.txt
++        image_name = item.split("\t")[0]
++        image_label = item.split("\t")[1]
++        if image_label not in d:
++            d[image_label] = [image_name]
++        else:
++            d[image_label] += [image_name]
++    # for item in d:
++    #     if not os.path.exists("/data/bitahub/Tiny-ImageNet/my_val/{}/images".format(item)):
++    #         os.makedirs("/data/bitahub/Tiny-ImageNet/my_val/{}/images".format(item))
++    #         # os.makedirs() could only been used when the path is not existed
++    #     for num,img in enumerate(d[item]):
++    #         source = "/data/bitahub/Tiny-ImageNet/val/images/{}".format(img)
++    #         destination = "/data/bitahub/Tiny-ImageNet/my_val/{}/images/{}_{}.JPEG".format(item, item, num)
++    #         # using shutil.copyfile() to create new val_dir just like the train_dir
++    #         shutil.copyfile(source, destination)
++    
++    # the dataset on bitahub is "read-only" mode, so cann't write the new folder "my_val"
++    for item in d:
++        if not os.path.exists("/mydata/my_val/{}/images".format(item)):
++            os.makedirs("/mydata/my_val/{}/images".format(item))
++            # os.makedirs() could only been used when the path is not existed
++        for num,img in enumerate(d[item]):
++            source = "/data/bitahub/Tiny-ImageNet/val/images/{}".format(img)
++            destination = "/mydata/my_val/{}/images/{}_{}.JPEG".format(item, item, num)
++            # using shutil.copyfile() to create new val_dir just like the train_dir
++            shutil.copyfile(source, destination)
++    # create new val_dir
++    # valdir = os.path.join(args.data, 'my_val')
++    valdir = '/mydata/my_val'
+     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                      std=[0.229, 0.224, 0.225])
+ 
++    #--------------- Change: no need to reshape and flip in tiny-imagenet ---------------------#
+     train_dataset = datasets.ImageFolder(
+         traindir,
+         transforms.Compose([
+-            transforms.RandomResizedCrop(224),
+-            transforms.RandomHorizontalFlip(),
++            # transforms.RandomResizedCrop(224),
++            # transforms.RandomHorizontalFlip(),
+             transforms.ToTensor(),
+             normalize,
+         ]))
+@@ -228,16 +276,27 @@ def main_worker(gpu, ngpus_per_node, args):
+         train_dataset, batch_size=args.batch_size, shuffle=(train_sampler is None),
+         num_workers=args.workers, pin_memory=True, sampler=train_sampler)
+ 
++    #--------------- Change: no need to reshape and flip in tiny-imagenet ---------------------#
+     val_loader = torch.utils.data.DataLoader(
+         datasets.ImageFolder(valdir, transforms.Compose([
+-            transforms.Resize(256),
+-            transforms.CenterCrop(224),
++            # transforms.Resize(256),
++            # transforms.CenterCrop(224),
+             transforms.ToTensor(),
+             normalize,
+         ])),
+         batch_size=args.batch_size, shuffle=False,
+         num_workers=args.workers, pin_memory=True)
+ 
++    # Create Tensorboard and assign its storage dir as "datetime + name_of_web_construction"
++    current_time = datetime.now().strftime('%b%d_%H-%M-%S')
++    logdir = os.path.join('/output', 'logs', current_time + '_' + args.arch)
++    writer = SummaryWriter(logdir)
++    
++    # Use Tendorboard to draw Graph of the net
++    # dummy_input = torch.rand(4, 3, 64, 64)          # The corresponding input of tiny-imagenet
++    # writer.add_graph(model, (dummy_input,))       # model in this .py file cannot be drawn by this way, because "torch.nn.DataParallel" is used when creating the model
++    summary(model, (3, 64, 64))         # Instead, using lib "summary" to represent the construction
++
+     if args.evaluate:
+         validate(val_loader, model, criterion, args)
+         return
+@@ -247,10 +306,11 @@ def main_worker(gpu, ngpus_per_node, args):
+             train_sampler.set_epoch(epoch)
+ 
+         # train for one epoch
+-        train(train_loader, model, criterion, optimizer, epoch, args)
++        # -------------Change: We need more returned value to draw tensorboard--------------------#
++        train_loss, train_acc = train(train_loader, model, criterion, optimizer, epoch, args)
+ 
+         # evaluate on validation set
+-        acc1 = validate(val_loader, model, criterion, args)
++        acc1, val_loss, val_acc = validate(val_loader, model, criterion, args)
+         
+         scheduler.step()
+ 
+@@ -269,6 +329,25 @@ def main_worker(gpu, ngpus_per_node, args):
+                 'optimizer' : optimizer.state_dict(),
+                 'scheduler' : scheduler.state_dict()
+             }, is_best)
++        # pick another two checkpoints for evaluation
++        if epoch == 5 or epoch == 10:
++             save_checkpoint({
++                'epoch': epoch + 1,
++                'arch': args.arch,
++                'state_dict': model.state_dict(),
++                'best_acc1': best_acc1,
++                'optimizer' : optimizer.state_dict(),
++                'scheduler' : scheduler.state_dict()
++            }, is_best,"checkpoint_epoch{}.pth.tar".format(epoch))
++
++        # when one epoch finished, save scalar in tensorboard for visibility
++        writer.add_scalar('scalar/train_loss', train_loss, epoch)
++        writer.add_scalar('scalar/train_acc', train_acc, epoch)
++        writer.add_scalar('scalar/val_loss', val_loss, epoch)
++        writer.add_scalar('scalar/val_acc', val_acc, epoch)
++
++    print("Training Finished")
++    writer.close()
+ 
+ 
+ def train(train_loader, model, criterion, optimizer, epoch, args):
+@@ -316,6 +395,9 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
+ 
+         if i % args.print_freq == 0:
+             progress.display(i)
++    
++    #---------------Change: Add more return values-----------------#
++    return loss, top5.avg       # Our aim is to boost the average of {Top5 accuracy} of train_dataset to 95%
+ 
+ 
+ def validate(val_loader, model, criterion, args):
+@@ -356,11 +438,18 @@ def validate(val_loader, model, criterion, args):
+             if i % args.print_freq == 0:
+                 progress.display(i)
+ 
++            if args.evaluate:       # when evaluating, show more detail about each picture
++                print("pic:{:2}  aim:{:2}  result:{:4} {:>8}".format(i, int(target), int(output.argmax()), 'correct' if int(target) == int(output.argmax()) else 'false'))
++                if i == 100:        # no need to caculate all 10,000 pics
++                      break
++
+         progress.display_summary()
+ 
+-    return top1.avg
++    #---------------Change: Add more return values-----------------#
++    return top1.avg, loss, top5.avg
+ 
+ 
++#------------- no other changes in the following parts -------------------#
+ def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
+     torch.save(state, filename)
+     if is_best:
